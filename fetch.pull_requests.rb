@@ -3,7 +3,7 @@ require 'csv'
 require 'time'
 
 # Replace with your GitHub token
-client = Octokit::Client.new(access_token: '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')
+client = Octokit::Client.new(access_token: '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')
 
 # Replace with your repository details
 owner = 'FlyTyGuy'
