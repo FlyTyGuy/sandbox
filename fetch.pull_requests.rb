@@ -1,9 +1,10 @@
 require 'octokit'
+require 'faraday/retry'
 require 'csv'
 require 'time'
 
-# Hardcode your GitHub token here (replace with your actual token)
-token = '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'
+# GitHub token
+token = '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'
 
 # Create a new Octokit client with the hardcoded token
 client = Octokit::Client.new(access_token: token)
@@ -41,8 +42,8 @@ CSV.open("pull_request_data.csv", "w") do |csv|
         merged_by,                    # Merged by
         pr_details.additions,         # Additions
         pr_details.deletions,         # Deletions
-        created_at,                   # Created At
-        merged_at || 'Not Merged',    # Merged At
+        created_at.to_s,              # Created At (convert to string)
+        merged_at ? merged_at.to_s : 'Not Merged',    # Merged At (convert to string)
         time_diff.nil? ? 'N/A' : time_diff.round(2)  # Time Difference in hours
       ]
     rescue Octokit::NotFound => e
